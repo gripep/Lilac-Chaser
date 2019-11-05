@@ -3,7 +3,9 @@ module CW where
 import Animation
 
 pic :: Animation
-pic = withPaint (always gray)
+pic = 
+    -- background
+    withPaint (always gray)
     (rect (always 800) (always 600))
     `plus`
     translate (always (425, 250))
