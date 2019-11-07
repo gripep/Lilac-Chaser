@@ -65,8 +65,6 @@ pic =
         [(dist* cos((pi*i)/6), dist*sin((pi*i)/6)) | i<- [1..maxCircles]])
             (withPaint (always gray) (circle (always cRadius)))
         )
-
-
         
 gen :: IO()
 gen = writeFile "output.svg" (svg xSize ySize pic)
