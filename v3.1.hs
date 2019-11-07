@@ -72,8 +72,6 @@ pic =
                 (withGenPaint (always blue) (always (1/i)) (circle (always (5))))
             | i<- [1..20]])
         )
-
-
         
 gen :: IO()
 gen = writeFile "output.svg" (svg xSize ySize pic)
