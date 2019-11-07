@@ -23,6 +23,10 @@ dist = 250
 maxCircles = 12
 -- so the circles would be 30 degrees apart from each other
 
+-- circle disappearnce time 
+-- https://en.wikipedia.org/wiki/Lilac_chaser
+disappear = 0.1
+
 -- !todo calculate the centre coordinates 
 -- trueMidPoint = cHeight/2 - 0.5
 
@@ -57,7 +61,7 @@ pic =
             | i<- [1..maxCircles]])
     `plus`
     -- invisible circle
-    translate (cycleSteps 0.2
+    translate (cycleSteps disappear
         [(dist* cos((pi*i)/6), dist*sin((pi*i)/6)) | i<- [1..maxCircles]])
             (withPaint (always gray) (circle (always cRadius)))
         )
