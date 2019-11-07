@@ -55,7 +55,7 @@ pic =
         -- y = radius of bigger circle * Sin theta
             [translate (always (dist* cos((pi*i)/6), dist*sin((pi*i)/6)))
                 (combine 
-                    [withGenPaint (always magenta) (always a)
+                    [withGenPaint (always magenta) (always (a* 0.25))
                         (circle (always (cRadius * (1-a))))
                     | a <- [0.1,0.2..1.0]])
             | i<- [1..maxCircles]])
