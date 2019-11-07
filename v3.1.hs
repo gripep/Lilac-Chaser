@@ -2,7 +2,7 @@
 -- 
 -- Name     :  Coursework for Functional Programming
 -- Authors  :  Kavishan Prabarajah - kavishn.prabarajah@city.ac.uk
---             Gianfranco Ripepi -
+--             Gianfranco Ripepi - gianfranco.ripepi@city.ac.uk
 --
 -----------------------------------------------------------------------------
 module CW where
