@@ -33,7 +33,7 @@ pic =
     withPaint (always gray) 
         (rect (always xSize) (always ySize))
     `plus`
-    -- translate to centre
+    -- translate to centre (400, 300)
     translate (always (xSize/2, ySize/2))
     -- cross
     (translate (always (-cHeight/2 , -cWidth/2))
@@ -46,7 +46,7 @@ pic =
     `plus`
     -- circles
     -- withGenPaint (always magenta) (always 0.75) 
-        combine
+        (combine
         -- x = radius of bigger circle * Cos theta
         -- y = radius of bigger circle * Sin theta
             [translate (always (dist* cos((pi*i)/6), dist*sin((pi*i)/6)))
@@ -54,8 +54,12 @@ pic =
                     [withGenPaint (always magenta) (always a)
                         (circle (always (cRadius * (1-a))))
                     | a <- [0.1,0.2..1.0]])
-            | i<- [1..maxCircles]]
-    
+            | i<- [1..maxCircles]])
+    `plus`
+    -- invisible circle
+    translate (cycleSteps 0.2
+        [(dist* cos((pi*i)/6), dist*sin((pi*i)/6)) | i<- [1..maxCircles]])
+            (withPaint (always gray) (circle (always cRadius)))
         )
 
 
