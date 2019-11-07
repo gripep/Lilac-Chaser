@@ -8,18 +8,22 @@ pic =
     withPaint (always gray)
     (rect (always 800) (always 600))
     `plus`
+    -- cross
     translate (always (425, 250))
         (rect (always 5) (always 35)) 
     `plus`
+    -- cross
     translate (always (410, 265))
         (rect (always 35) (always 5))
     `plus`
+    -- circles
     translate (always (425, 275))
         (combine 
             [translate (always (200*sin((pi / 3.0) * (i / 2.0)), 200*cos((pi / 3.0) * (i / 2.0))))
                 (withPaint (always fuchsia) ((circle (always 20))))
             | i <- [1..12]])
     `plus`
+    -- invisible circles 
     translate (always (425, 275))
         (translate (cycleSmooth 0.5
             [(200*sin((pi / 3.0) * (i / 2.0)), 200*cos((pi / 3.0) * (i / 2.0))) | i <- [1..12]])
