@@ -30,9 +30,8 @@ disappear = 0.1
 -- !todo calculate the centre coordinates 
 -- trueMidPoint = cHeight/2 - 0.5
 
-
-pic :: Animation
-pic = 
+picture :: Animation
+picture = 
     -- background
     withPaint (always gray) 
         (rect (always xSize) (always ySize))
@@ -53,22 +52,22 @@ pic =
         (combine
         -- x = radius of bigger circle * Cos theta
         -- y = radius of bigger circle * Sin theta
-            [translate (always (dist* cos((pi*i)/6), dist*sin((pi*i)/6)))
+            [translate (always (dist*cos((pi*i)/6), dist*sin((pi*i)/6)))
                 (combine 
-                    [withGenPaint (always magenta) (always (a* 0.25))
+                    [withGenPaint (always magenta) (always (a*0.25))
                         (circle (always (cRadius * (1-a))))
                     | a <- [0.1,0.2..1.0]])
             | i<- [1..maxCircles]])
     `plus`
     -- invisible circle
     (translate (cycleSteps disappear
-        [(dist* cos((pi*i)/6), dist*sin((pi*i)/6)) | i<- [1..maxCircles]])
+        [(dist*cos((pi*i)/6), dist*sin((pi*i)/6)) | i<- [1..maxCircles]])
             (withPaint (always gray) (circle (always cRadius))))
     -- spinner animation around the circle
     `plus`
     rotate (spinner (disappear*maxCircles)) 
         (combine
-            [translate (always  ((dist+ cRadius)* cos((pi*i)/180), -((dist+cRadius)*sin((pi*i)/180))))
+            [translate (always  ((dist+cRadius)*cos((pi*i)/180), -((dist+cRadius)*sin((pi*i)/180))))
                 (withGenPaint (always blue) (always (1/i)) (circle (always (5))))
             | i<- [1..20]])
         )
