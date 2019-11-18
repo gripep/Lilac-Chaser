@@ -1,8 +1,8 @@
 -----------------------------------------------------------------------------
 -- 
 -- Name     :  Coursework for Functional Programming
--- Authors  :  Kavishan Prabarajah - kavishan.prabarajah@city.ac.uk
---             Gianfranco Ripepi - gianfranco.ripepi@city.ac.uk
+-- Authors  :  Kavishan Prabarajah - acnj785 (kavishan.prabarajah@city.ac.uk)
+--             Gianfranco Ripepi - acsc363 (gianfranco.ripepi@city.ac.uk )
 --
 -----------------------------------------------------------------------------
 module MyAnimation where
@@ -30,7 +30,7 @@ disappear = 0.1
 -- !todo calculate the centre coordinates 
 -- trueMidPoint = cHeight/2 - 0.5
 
--- x to cartesian
+-- x to cartesian function
 xToCartesian :: Double -> Double -> Double -> Double
 xToCartesian dist i n = dist*cos((pi*i)/n)
 
@@ -71,13 +71,6 @@ picture =
     (translate (cycleSteps disappear
         [((xToCartesian dist i 6), (yToCartesian dist i 6)) | i<-[1..maxCircles]])
             (withPaint (always gray) (circle (always cRadius))))
-    -- spinner animation around the circle
-    -- `plus`
-    -- rotate (spinner (disappear*maxCircles)) 
-    --     (combine
-    --         [translate ((always (xToCartesian (dist+cRadius) i 180), -(yToCartesian (dist+cRadius) i 180)))
-    --             (withGenPaint (always blue) (always (1/i)) (circle (always (5))))
-    --         | i<- [1..20]])
         )
         
 test :: IO()
