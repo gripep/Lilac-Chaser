@@ -62,12 +62,14 @@ drawCircles = (combine
                     | a <- [0.1,0.2..1.0]])
             | i<- [1..maxCircles]])
 
+-- draw invisible circle
 drawInvisibleCircle :: Animation
 drawInvisibleCircle = 
     (translate (cycleSteps disappear
         [((xToCartesian dist i 6), (yToCartesian dist i 6)) | i<-[1..maxCircles]])
             (withPaint (always gray) (circle (always cRadius))))
 
+-- Animation to generate final picture
 picture :: Animation
 picture = 
     drawBG
