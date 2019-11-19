@@ -76,13 +76,11 @@ picture =
     `plus`
     -- translate to centre (400, 300)
     translate (always (xSize/2, ySize/2))
-    (translate (always (-cHeight/2 , -cWidth/2))
-        drawCross
+    (drawCross
     `plus`
         drawCircles    
     `plus`
-        drawInvisibleCircle
-    )
+        drawInvisibleCircle)
         
 test :: IO()
 test = writeFile "test.svg" (svg xSize ySize picture)
