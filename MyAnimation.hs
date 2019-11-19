@@ -27,9 +27,6 @@ maxCircles = 12
 -- https://en.wikipedia.org/wiki/Lilac_chaser
 disappear = 0.1
 
--- !todo calculate the centre coordinates 
--- trueMidPoint = cHeight/2 - 0.5
-
 -- x to cartesian function
 xToCartesian :: Double -> Double -> Double -> Double
 xToCartesian dist i n = dist*cos((pi*i)/n)
@@ -38,26 +35,24 @@ xToCartesian dist i n = dist*cos((pi*i)/n)
 yToCartesian :: Double -> Double -> Double -> Double
 yToCartesian dist i n = dist*sin((pi*i)/n)
 
-picture :: Animation
-picture = 
-    -- background
-    withPaint (always gray) 
-        (rect (always xSize) (always ySize))
-    `plus`
-    -- translate to centre (400, 300)
-    translate (always (xSize/2, ySize/2))
-    -- cross
-    (translate (always (-cHeight/2 , -cWidth/2))
+-- draw background
+drawBG:: Animation
+drawBG = withPaint (always gray) (rect (always xSize) (always ySize))
+
+-- draw Cross at the origin
+drawCross :: Animation
+drawCross = 
+    translate (always (-cHeight/2 , -cWidth/2))
         (withPaint (always black)
-            (rect (always cHeight) (always cWidth)))
+         (rect (always cHeight) (always cWidth)))
     `plus`
     translate (always (-cWidth/2 , -cHeight/2))
-    (withPaint (always black)
-        (rect (always cWidth) (always cHeight)))
-    `plus`
-    -- circles
-    -- withGenPaint (always magenta) (always 0.75) 
-        (combine
+        (withPaint (always black)
+         (rect (always cWidth) (always cHeight)))
+
+-- Draw circles around the origin
+drawCircles :: Animation
+drawCircles = (combine
         -- x = radius of bigger circle * Cos theta
         -- y = radius of bigger circle * Sin theta
             [translate (always ((xToCartesian dist i 6), (yToCartesian dist i 6)))
@@ -66,12 +61,26 @@ picture =
                         (circle (always (cRadius * (1-a))))
                     | a <- [0.1,0.2..1.0]])
             | i<- [1..maxCircles]])
-    `plus`
-    -- invisible circle
+
+drawInvisibleCircle :: Animation
+drawInvisibleCircle = 
     (translate (cycleSteps disappear
         [((xToCartesian dist i 6), (yToCartesian dist i 6)) | i<-[1..maxCircles]])
             (withPaint (always gray) (circle (always cRadius))))
-        )
+
+picture :: Animation
+picture = 
+    drawBG
+    `plus`
+    -- translate to centre (400, 300)
+    translate (always (xSize/2, ySize/2))
+    (translate (always (-cHeight/2 , -cWidth/2))
+        drawCross
+    `plus`
+        drawCircles    
+    `plus`
+        drawInvisibleCircle
+    )
         
 test :: IO()
 test = writeFile "test.svg" (svg xSize ySize picture)
