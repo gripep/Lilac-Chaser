@@ -1,4 +1,4 @@
-# functional_programming_cw
+# Lilac Chaser
 
 The lilac chaser is a visual illusion.
 Stare at the black center cross for a minimum of 30 seconds and see what happens!
